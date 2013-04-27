@@ -53,8 +53,8 @@ function login_alerts_prowl() {
 
 	$message = "WP Login Attempt".htmlentities($who)."\nDate: ".$date." \nIP: ".$ip." \nHostname: ".$hostaddress." \nBrowser: ".htmlentities($browser)." \nReferral: ".htmlentities($referred)." \n";
 
-	$username = 'USER_NAME';
-	$password = 'USER_PASSWORD';
+	$username = 'USERNAME';
+	$password = 'SECRET_KEY';
 
 	$data = array(
     	"message" => $message,
