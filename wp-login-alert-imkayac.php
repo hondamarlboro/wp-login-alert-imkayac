@@ -22,9 +22,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 if (preg_match('#'.basename(__FILE__).'#', $_SERVER['PHP_SELF'])) die('Access denied - you cannot directly call this file');
 
-function login_alerts_prowl() { 
+function login_alerts_imkayac() { 
 
-  $ip = $_SERVER['REMOTE_ADDR'];
+	$ip = $_SERVER['REMOTE_ADDR'];
 	$hostaddress = gethostbyaddr($ip);
 	$browser = htmlspecialchars($_SERVER['HTTP_USER_AGENT'],ENT_QUOTES | ENT_HTML401,"UTF-8");
 	$referred =  htmlspecialchars($_SERVER['HTTP_REFERER'],ENT_QUOTES | ENT_HTML401,"UTF-8"); // a quirky spelling mistake that stuck in php
