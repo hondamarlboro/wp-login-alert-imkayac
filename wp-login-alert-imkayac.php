@@ -85,21 +85,21 @@ function login_alerts_imkayac() {
 
 }
 
-add_action( 'login_enqueue_scripts', 'login_alerts_prowl' );
+add_action( 'login_enqueue_scripts', 'login_alerts_imkayac' );
 
-function login_alerts_prowl_url() {
+function login_alerts_imkayac_url() {
     return get_bloginfo( 'url' );
 }
 
-add_filter( 'login_headerurl', 'login_alerts_prowl_url' );
+add_filter( 'login_headerurl', 'login_alerts_imkayac_url' );
 
-function login_alerts_prowl_url_title() {
+function login_alerts_imkayac_url_title() {
     return 'All login attempts are reported to the Administrator. You have been warned.';
 }
-add_filter( 'login_headertitle', 'login_alerts_prowl_url_title' );
+add_filter( 'login_headertitle', 'login_alerts_imkayac_url_title' );
 
 if (!empty($_POST['log'])) {
-	login_alerts_prowl();
+	login_alerts_imkayac();
 }
 
 ?>
