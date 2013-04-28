@@ -8,6 +8,6 @@ wp-login-alert-imkayac
 
 Changelog
 ============
-0.1 Initial release, April 2013
+0.1 Initial release, April 25, 2013
 
 0.11 Correction of typo, April 28, 2013
