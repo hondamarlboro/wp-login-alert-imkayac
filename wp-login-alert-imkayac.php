@@ -3,7 +3,7 @@
 Plugin Name: WP Login Alert Notify(im.kayac.com)
 Plugin URI: http://daisukeblog.com/
 Description: Notify alerts to im.kayac.com if someone including you has tried to login at Login Control Panel
-Version: 0.1
+Version: 0.11
 Author: hondamarlboro
 Author URI: http://daisukeblog.com/
 License: GPLv2 or later http://www.gnu.org/licenses/gpl-2.0.html
