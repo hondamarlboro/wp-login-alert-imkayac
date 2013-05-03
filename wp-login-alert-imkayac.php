@@ -3,7 +3,7 @@
 Plugin Name: WP Login Alert Notify(im.kayac.com)
 Plugin URI: http://daisukeblog.com/
 Description: Notify alerts to im.kayac.com if someone including you has tried to login at Login Control Panel
-Version: 0.11
+Version: 0.2
 Author: hondamarlboro
 Author URI: http://daisukeblog.com/
 License: GPLv2 or later http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,10 +20,38 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
+//Add menu to WP dashboard
+add_action('admin_menu', 'wp_login_alert_addmenu');
+function wp_login_alert_addmenu() {
+  add_options_page( __( 'WP Login Alert to im.kayac.com', 'wp-login-alert-imkayac' ), __( 'WP Login Alert to im.kayac.com', 'wp-login-alert-imkayac' ), 'manage_options', 'wp-login-alert-imkayac', 'wpla_admin' );
+      return;
+}
+
+//Add "Settings" to Plugins List
+add_filter( 'plugin_action_links', 'wpla_admin_settings_link', 10, 2  );
+function wpla_admin_settings_link( $links, $file ) {
+
+  if ( plugin_basename(__FILE__) == $file ) {
+    $settings_link = '<a href="' . admin_url( 'options-general.php?page=wp-login-alert-imkayac' ) . '">' . 'Settings'. '</a>';
+    array_unshift( $links, $settings_link );
+  }
+
+  return $links;
+}
+
+// Call settings option saved
+$login_alerts_options  = get_option('login_alerts_settings');
+
+// Require setting manager file
+include('login_alerts_imkayac_manager_admin.php');
+
+
 if (preg_match('#'.basename(__FILE__).'#', $_SERVER['PHP_SELF'])) die('Access denied - you cannot directly call this file');
 
 function login_alerts_imkayac() { 
 
+	global $login_alerts_options;
+	
 	$ip = $_SERVER['REMOTE_ADDR'];
 	$hostaddress = gethostbyaddr($ip);
 	$browser = htmlspecialchars($_SERVER['HTTP_USER_AGENT'],ENT_QUOTES | ENT_HTML401,"UTF-8");
@@ -53,8 +81,8 @@ function login_alerts_imkayac() {
 
 	$message = "WP Login Attempt".htmlentities($who)."\nDate: ".$date." \nIP: ".$ip." \nHostname: ".$hostaddress." \nBrowser: ".htmlentities($browser)." \nReferral: ".htmlentities($referred)." \n";
 
-	$username = 'USERNAME';
-	$password = 'SECRET_KEY';
+	$username = $login_alerts_options['username'];
+	$password = $login_alerts_options['secretkey'];
 
 	$data = array(
     	"message" => $message,
